@@ -1,0 +1,117 @@
+@layer theme, base, antd, components, utilities;
+
+@import "tailwindcss";
+@import "./variables.css";
+@import "./themes.css";
+
+
+:root {
+  --adm-popup-z-index: 10;
+  --adm-mask-z-index: 10;
+  --adm-color-primary: #07073A !important;
+}
+
+
+* {
+  font-family: var(--font-inter);
+}
+
+
+.transition-bg {
+  transition: all 0.3s linear;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+  transition-behavior: normal;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
+.adm-floating-panel-header{
+  box-shadow:"0px -1px 6px 0px #0000001A"
+}
+
+.month-label::before {
+  content: attr(data-month) !important;
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-brand-primary-1);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.month-label::after {
+  content: attr(data-day) !important;
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary-1);
+  white-space: nowrap;
+}
+.ant-btn-icon{
+  margin-top: 4px;
+}
+
+.visible-card-overflow .ant-card-meta-detail{
+  overflow: visible !important;
+}
+
+.ant-tabs-nav::before {
+ display: none !important;
+}
+
+
+.ant-btn-default:disabled {
+  color: var(--color-default-disable) !important;
+  background: var(--color-background-5) !important;
+}
+
+.ant-input-number-group .ant-input-number-affix-wrapper:not(:first-child){
+    border-left: 0 !important;
+}
+.ant-form-item .ant-form-item-label >label {
+  font-weight: 600;
+}
+
+.ant-form-item .ant-form-item-explain-error{
+   font-weight: 500;
+}
+
+.ant-btn-text:disabled {
+  color: var(--color-default-disable) !important;
+}
+
+.adm-calendar-picker-view-body {
+  height: 50dvh !important;
+}
+
+.ant-otp-input-wrapper {
+  width: 76px !important;
+  height: 76px !important;
+}
+
+.ant-otp-input-wrapper input {
+  width: 76px !important;
+  height: 76px !important;
+  font-size: 28px;
+}
+

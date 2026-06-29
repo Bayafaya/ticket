@@ -1,0 +1,162 @@
+name: Delivery
+
+on: push
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Fix Eslint error
+        run: yarn run lint:fix
+
+      - name: Check Types
+        run: yarn run lint:type
+
+  release_app_to_prod:
+    name: Release to production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: ["validate"]
+
+    env:
+      AWS_DEFAULT_REGION: eu-north-1
+      AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      ECR_IMAGE_PATH: akela_admin
+      ECR_REGISTRY_URL: 272730615381.dkr.ecr.eu-north-1.amazonaws.com
+      EC2_HOST: ec2-13-51-173-90.eu-north-1.compute.amazonaws.com
+      EC2_USERNAME: ubuntu
+      EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set ENV
+        run: |
+          VERSION="v$(git rev-parse --short HEAD)"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${ECR_REGISTRY_URL}/${ECR_IMAGE_PATH}:${VERSION}" >> $GITHUB_ENV
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ env.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and Push Image
+        run: |
+          docker build -t ${{ env.IMAGE_TAG }} -f ./docker/prod/Dockerfile .
+          docker push ${{ env.IMAGE_TAG }}
+
+      - name: Deploy to EC2
+        run: |
+          echo "${{ env.EC2_PRIVATE_KEY }}" > private_key && chmod 600 private_key
+
+          ssh -o StrictHostKeyChecking=no -i private_key ${{ env.EC2_USERNAME }}@${{ env.EC2_HOST }} '
+            echo "Login to ECR"
+            aws ecr get-login-password --region ${{ env.AWS_DEFAULT_REGION }} | sudo docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY_URL }}
+
+            echo "Stop running containers"
+            CONTAINERS=$(sudo docker ps -aq)
+            if [ -n "$CONTAINERS" ]; then
+              sudo docker rm -f $CONTAINERS
+            else
+              echo "No containers to remove"
+            fi
+
+            echo "Free disk space"
+            sudo docker system prune -af --volumes
+            sudo docker volume prune -f
+
+            echo "Pull new image"
+            sudo docker pull ${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_IMAGE_PATH }}:${{ env.VERSION }}
+
+            echo "Run container"
+            sudo docker run -d --name app -p 80:3000 ${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_IMAGE_PATH }}:${{ env.VERSION }}
+          '
+
+  release_app_to_dev:
+    name: Release to dev
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    needs: ["validate"]
+
+    env:
+      AWS_DEFAULT_REGION: eu-north-1
+      AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      ECR_IMAGE_PATH: akela_admin
+      ECR_REGISTRY_URL: 272730615381.dkr.ecr.eu-north-1.amazonaws.com
+      EC2_HOST: ec2-13-51-173-90.eu-north-1.compute.amazonaws.com
+      EC2_USERNAME: ubuntu
+      EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set ENV
+        run: |
+          VERSION="v$(git rev-parse --short HEAD)"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${ECR_REGISTRY_URL}/${ECR_IMAGE_PATH}:${VERSION}" >> $GITHUB_ENV
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ env.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and Push Image
+        run: |
+          docker build -t ${{ env.IMAGE_TAG }} -f ./docker/dev/Dockerfile .
+          docker push ${{ env.IMAGE_TAG }}
+
+      - name: Deploy to EC2
+        run: |
+          echo "${{ env.EC2_PRIVATE_KEY }}" > private_key && chmod 600 private_key
+
+          ssh -o StrictHostKeyChecking=no -i private_key ${{ env.EC2_USERNAME }}@${{ env.EC2_HOST }} '
+            echo "Login to ECR"
+            aws ecr get-login-password --region ${{ env.AWS_DEFAULT_REGION }} | sudo docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY_URL }}
+
+            echo "Stop running containers"
+            CONTAINERS=$(sudo docker ps -aq)
+            if [ -n "$CONTAINERS" ]; then
+              sudo docker rm -f $CONTAINERS
+            else
+              echo "No containers to remove"
+            fi
+
+            echo "Free disk space"
+            sudo docker system prune -af --volumes
+            sudo docker volume prune -f
+
+            echo "Pull new image"
+            sudo docker pull ${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_IMAGE_PATH }}:${{ env.VERSION }}
+
+            echo "Run container"
+            sudo docker run -d --name app -p 80:3000 ${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_IMAGE_PATH }}:${{ env.VERSION }}
+          '

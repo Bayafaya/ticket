@@ -1,0 +1,9 @@
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* themes changes if need to change color for antd design */
+
+[data-theme="dark"] {
+}
+
+[data-theme="light"] {
+}

@@ -1,0 +1,27 @@
+{
+  "Svg Component": {
+    "prefix": "fcsvg",
+    "body": [
+      "import { SVGProps } from \"../model/types\"",
+      "",
+      "const ${TM_FILENAME_BASE} = ({ size, color, ...props }: SVGProps) => {",
+      "  return <>${TM_FILENAME_BASE}</>",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE}",
+      "{color || \"currentColor\"}"
+    ],
+    "description": "Creates a Filename component"
+  },
+  "Test template": {
+    "prefix": "tt",
+    "body": [
+      "describe(\"${TM_FILENAME_BASE}\", () => {",
+      "  test(\"\", () => {",
+      "    expect().toEqual();",
+      "  });",
+      "});"
+    ],
+    "description": "Creates a test template for a component"
+  }
+}

@@ -1,0 +1,27 @@
+@theme {
+  /*real primrary colors */
+  --color-error-main: #ff3d3e;
+  --color-success-main: #00b735;
+  --color-warning-main: #fad100;
+  --color-tag-orange: #cd7800;
+
+  --color-brand-primary-1: #0E7F93;
+  --color-brand-secondary-1: #00C6C9;
+  --color-brand-primary-2: #FF7AA3;
+  --color-brand-secondary-2: #4D4D4D;
+  --color-text-primary-1: #101010;
+  --color-button-pressed: #049FA2;
+  --color-brand-primary-disable: #00C6C966;
+  --color-text-button-disable: #4D4D4D52;
+  --color-default-button-border: #747775;
+  --color-light-theme-bg: #FCFCFC;
+  --color-link: #0882C0;
+  --color-boder-inputs: #4D4D4D1F;
+
+
+  --radius-primary-button: 32px;
+
+  --shadow-back-button:  0px 2px 8px 2px rgba(77, 77, 77, 0.04);
+  --shadow-capsule-segmentd: 0px 0px 2.5px 0px rgba(87, 99, 101, 0.24);
+;
+}

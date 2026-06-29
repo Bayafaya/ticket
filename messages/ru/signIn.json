@@ -1,0 +1,9 @@
+{
+    "signIn": "Вход",
+    "password": "Пароль",
+    "enterSome": "Введите {text}",
+    "phoneNumber": "номер телефона",
+    "email": "адрес эл.почты",
+    "parnterId": "ID партнёра",
+    "pleaseInputUr": "Пожалуйста, введите свой {text} !"
+}

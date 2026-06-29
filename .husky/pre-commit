@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -e
+
+echo "🔧 Fixing lint issues..."
+yarn lint:fix
+
+echo "🧪 Type checking..."
+yarn lint:type
+
+echo "✅ Pre-commit checks passed!"

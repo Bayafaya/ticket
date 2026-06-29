@@ -1,0 +1,5 @@
+const ACTIVE_CATALOG_TYPE_ID = 1;
+const RESEND_DELAY_MIN = 3;
+const RESEND_KEY = "otp_resend_time";
+
+export { ACTIVE_CATALOG_TYPE_ID, RESEND_DELAY_MIN, RESEND_KEY};

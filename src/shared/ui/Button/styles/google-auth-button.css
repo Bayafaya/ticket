@@ -1,0 +1,9 @@
+.googleAuthButton {}
+
+.googleAuthButton:hover {
+  border-color: #747775 !important;
+}
+
+.googleAuthButton:active {
+  border-color: #747775 !important;
+}

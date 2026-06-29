@@ -1,0 +1,5 @@
+.custom-font-weight {}
+
+.custom-font-weight .ant-form-item-label > label {
+    font-weight: 400;
+}

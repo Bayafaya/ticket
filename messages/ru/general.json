@@ -1,0 +1,26 @@
+{
+    "home": "Главная",
+    "history": "История",
+    "map": "Карта",
+    "chat": "Чат",
+    "profile": "Профиль",
+    "appName": "Бишкек",
+    "searchPlaceholder": "Поиск услуг, мастеров, салонов",
+    "services": "Услуги",
+    "serviceNotFound": "Ничего не найдено",
+    "book": "Записаться",
+    "books": "Записи",
+    "more": "Подробнее",
+    "collapse": "Свернуть",
+    "filter": "Фильтры",
+    "searchNotFound": "Результаты поиска не найдены",
+    "gotoGallery": "Перейти в галерею",
+
+    "mockBanner": "Баннер",
+    "mockBannerDescription": "Мы работаем мобильной версией приложения",
+    "list": "Список",
+    "other": "Ещё",
+    "enterYourPhoneNum": "Введите номер телефона",
+    "enterCorrectFormat": "Введите корректный формат {format}",
+    "loading": "Загрузка..."
+}

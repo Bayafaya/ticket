@@ -1,0 +1,11 @@
+.ant-select-filled .ant-select-selector {
+  border: 1px solid var(--primary) !important;
+}
+
+.ant-input-filled {
+  border: 1px solid var(--primary) !important;
+}
+
+.ant-picker-filled {
+  border: 1px solid var(--primary) !important;
+}
