@@ -7,6 +7,7 @@ export const MoviesList = async () => {
 
   const movies = await payload.find({
     collection: "movies",
+    pagination: false,
     where: {
       isVisible: {
         equals: true,
@@ -15,7 +16,7 @@ export const MoviesList = async () => {
   });
 
   return (
-    <div>
+    <div className="grid grid-cols-1 gap-3">
       {movies.docs.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}

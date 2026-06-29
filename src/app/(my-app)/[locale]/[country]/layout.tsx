@@ -10,8 +10,8 @@ import SetInitialTheme from "@/app/(my-app)/components/SetInitialTheme";
 import { routing } from "@/app/(my-app)/provider/i18nProvider";
 
 export const metadata: Metadata = {
-  title: "Levante",
-  description: "Levante default description",
+  title: "cinemapark_astana",
+  description: "Ашық аспан аясындағы кинотеатр",
 };
 
 const InterFont = Inter({

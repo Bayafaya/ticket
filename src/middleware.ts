@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const countries = ["kg", "ru"];
+const countries = ["kg", "ru", "kz"];
 const locales = ["ru", "ky", "en"];
 
 export async function middleware(request: NextRequest) {
@@ -23,14 +23,11 @@ export async function middleware(request: NextRequest) {
   // locale по умолчанию
   const locale = "ru";
 
-  return NextResponse.redirect(
-    new URL(`/${locale}/${country}`, request.url)
-  );
+  return NextResponse.redirect(new URL(`/${locale}/${country}`, request.url));
 }
 
 async function getCountryByIp(req: NextRequest) {
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
 
   try {
     const res = await fetch(`https://ipapi.co/${ip}/json/`, {
@@ -46,6 +43,8 @@ async function getCountryByIp(req: NextRequest) {
         return "kg";
       case "RU":
         return "ru";
+      case "KZ":
+        return "kz";
       default:
         return "kg";
     }

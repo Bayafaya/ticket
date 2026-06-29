@@ -47,6 +47,35 @@ export const MoviesCollection: CollectionConfig = {
       },
     },
     {
+      name: "rentalPeriod",
+      label: "Период проката",
+      type: "group",
+      fields: [
+        {
+          name: "from",
+          label: "С",
+          type: "date",
+          required: true,
+          admin: {
+            date: {
+              pickerAppearance: "dayOnly",
+            },
+          },
+        },
+        {
+          name: "to",
+          label: "По",
+          type: "date",
+          required: true,
+          admin: {
+            date: {
+              pickerAppearance: "dayOnly",
+            },
+          },
+        },
+      ],
+    },
+    {
       name: "totalSeats",
       type: "number",
       label: "Всего мест",

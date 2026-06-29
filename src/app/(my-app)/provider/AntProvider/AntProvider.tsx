@@ -111,6 +111,10 @@ export function AntProvider({ children }: PropsWithChildren) {
             Select: {
               colorBorder: "var(--color-boder-inputs)",
             },
+            Modal: {
+              padding: 0,
+              colorBgBase: "#111111",
+            },
           },
         }}
         locale={ruRU}

@@ -190,6 +190,10 @@ export interface Movie {
   } | null;
   startTime: string;
   endTime: string;
+  rentalPeriod: {
+    from: string;
+    to: string;
+  };
   totalSeats: number;
   availableSeats: number;
   adultPrice: number;
@@ -345,6 +349,12 @@ export interface MoviesSelect<T extends boolean = true> {
   description?: T;
   startTime?: T;
   endTime?: T;
+  rentalPeriod?:
+    | T
+    | {
+        from?: T;
+        to?: T;
+      };
   totalSeats?: T;
   availableSeats?: T;
   adultPrice?: T;
