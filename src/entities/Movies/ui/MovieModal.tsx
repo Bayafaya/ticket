@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 "use client";
 import {
   ClockCircleOutlined,
@@ -224,7 +226,7 @@ export const MovieModal = ({
               prefix={
                 <PhoneOutlined style={{ color: "rgba(255,255,255,0.25)" }} />
               }
-              placeholder="+996 700 000 000"
+              placeholder="+7 700 000 00 00"
               style={{
                 background: "rgba(255,255,255,0.06)",
                 border: "1px solid rgba(255,255,255,0.1)",

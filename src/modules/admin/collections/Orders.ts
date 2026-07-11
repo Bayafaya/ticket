@@ -1,6 +1,11 @@
 export const OrdersCollection = {
   slug: "orders",
-
+  access: {
+    create: () => true,
+    read: () => true,
+    update: () => false,
+    delete: () => false,
+  },
   hooks: {
     beforeChange: [
       //@ts-expect-error bug from payload
@@ -33,6 +38,7 @@ export const OrdersCollection = {
             data: {
               availableSeats: oldMovie.availableSeats + oldTotalTickets,
             },
+            overrideAccess: true,
           });
         }
 
@@ -50,6 +56,7 @@ export const OrdersCollection = {
           data: {
             availableSeats: newMovie.availableSeats - totalTickets,
           },
+          overrideAccess: true,
         });
 
         return data;
