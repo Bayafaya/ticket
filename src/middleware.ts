@@ -54,5 +54,5 @@ async function getCountryByIp(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|favicon.ico|admin).*)"],
+  matcher: ["/((?!api|_next|admin|.*\\..*).*)"],
 };

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 "use client";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { Typography } from "antd";

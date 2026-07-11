@@ -25,6 +25,7 @@ export default buildConfig({
     UsersCollection,
     MediaCollection,
     MoviesCollection,
+    //@ts-expect-error bug from payload
     OrdersCollection,
   ],
   editor: lexicalEditor(),

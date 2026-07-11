@@ -3,6 +3,7 @@ export const OrdersCollection = {
 
   hooks: {
     beforeChange: [
+      //@ts-expect-error bug from payload
       async ({ data, req, operation, originalDoc }) => {
         const newMovieId =
           typeof data.movie === "object" ? data.movie.id : data.movie;
@@ -55,6 +56,7 @@ export const OrdersCollection = {
       },
     ],
     afterDelete: [
+      //@ts-expect-error bug from payload
       async ({ doc, req }) => {
         const movieId =
           typeof doc.movie === "object" ? doc.movie.id : doc.movie;

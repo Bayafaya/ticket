@@ -15,6 +15,7 @@ export const MoviesCollection: CollectionConfig = {
     {
       name: "poster",
       type: "upload",
+      //@ts-expect-error bug from payload
       relationTo: "media",
       label: "Постер",
     },

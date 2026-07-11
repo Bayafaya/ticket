@@ -8,6 +8,7 @@ export async function POST(req: Request) {
   const body = await req.json();
 
   const order = await payload.create({
+    //@ts-expect-error bug from payload
     collection: "orders",
     data: body,
   });

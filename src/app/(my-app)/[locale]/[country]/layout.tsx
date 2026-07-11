@@ -12,6 +12,9 @@ import { routing } from "@/app/(my-app)/provider/i18nProvider";
 export const metadata: Metadata = {
   title: "cinemapark_astana",
   description: "Ашық аспан аясындағы кинотеатр",
+  icons: {
+    icon: "/mini-log.svg",
+  },
 };
 
 const InterFont = Inter({
@@ -44,7 +47,7 @@ export default async function RootLayout({
     >
       <head>
         <SetInitialTheme />
-        <link rel="icon" href="/akela-logo.png" type="image/svg+xml" />
+        <link rel="icon" href="/mini-log.svg" type="image/svg+xml" />
       </head>
       <body className="bg-light-theme-bg font-inter dark:bg-black green:bg-green-500 transition-bg">
         <NextIntlClientProvider locale={locale} messages={messages}>
