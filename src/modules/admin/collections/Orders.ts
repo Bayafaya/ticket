@@ -3,8 +3,8 @@ export const OrdersCollection = {
   access: {
     create: () => true,
     read: () => true,
-    update: () => false,
-    delete: () => false,
+    update: () => true,
+    delete: () => true,
   },
   hooks: {
     beforeChange: [
