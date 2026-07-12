@@ -5,12 +5,6 @@ export const MoviesCollection: CollectionConfig = {
   admin: {
     useAsTitle: "name",
   },
-  access: {
-    read: () => true,
-    create: () => false,
-    update: () => false,
-    delete: () => false,
-  },
   fields: [
     {
       name: "name",

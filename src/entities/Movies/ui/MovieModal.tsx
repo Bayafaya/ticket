@@ -251,6 +251,7 @@ export const MovieModal = ({
               <InputNumber
                 min={0}
                 max={movie.availableSeats}
+                type="number"
                 style={{
                   width: "100%",
                   background: "rgba(255,255,255,0.06)",
@@ -278,6 +279,7 @@ export const MovieModal = ({
             >
               <InputNumber
                 min={0}
+                type="number"
                 max={movie.availableSeats}
                 style={{
                   width: "100%",

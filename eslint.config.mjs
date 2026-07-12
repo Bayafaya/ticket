@@ -16,6 +16,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignores: ["src/migrations/**"],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   jsdoc.configs["flat/recommended"],
   i18next.configs["flat/recommended"],
